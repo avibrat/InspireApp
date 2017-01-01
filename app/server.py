@@ -66,7 +66,7 @@ def login():
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
 	querylist = ast.literal_eval(resp.text)
 	query_json = {}
-	if len(querylist) == 1:
+	if len(querylist) == 1 and querylist[0]["pwd"] == password:
 		query_json["validity"] = True
 		query_json["username"] = querylist[0]["username"]
 	else:
