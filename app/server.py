@@ -65,6 +65,8 @@ def signup():
 
 	if "affected_rows" in resp_json:
 		final_result["validity"] = True
+		final_result["email"] = email
+		final_result["username"] = username
 	else:
 		final_result["validity"] = False
 		final_result["error"] = resp_json["error"]
