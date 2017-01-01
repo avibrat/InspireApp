@@ -131,10 +131,10 @@ def get_next_id():
 	
 @app.route("/makesolutionpost",methods=["POST"])
 def make_solution_post():
-	username = call_appropriate_get('email')
-	email = call_appropriate_get('username')
-	post_text = call_appropriate_get('post_text')
-	date = call_appropriate_get('date')
+	#username = call_appropriate_get('email')
+	#email = call_appropriate_get('username')
+	#post_text = call_appropriate_get('post_text')
+	#date = call_appropriate_get('date')
 	pid = get_next_id()
 	return pid
 	
