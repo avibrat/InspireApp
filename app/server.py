@@ -23,7 +23,7 @@ else:
 query_url = data_url + '/v1/query'
 
 
-android_test = True
+android_test = False
 
 
 def call_appropriate_get(parameter):
@@ -94,15 +94,27 @@ def login():
 	else:
 		query_json["validity"] = False
 		query_json["username"] = None
+	
 	query_json["status"] = resp.status_code
 	query_json["gottten_email"] = email
 	query_json["gotten_password"] = password
 	resp.connection.close()
 	return json.dumps(query_json)	
 
-@app.route("/posts",methods=["POST"])
+
+@app.route("/solutionfeed",methods=["POST"])
 def get_posts():
-	username = call_appropriate_get('username')
+	url = query_url
+	params = {
+		"type":"select",
+		"args":{
+			"table":"user_posts",
+			"columns":["*"]
+		}
+	}
+	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
+	querylist = ast.literal_eval(resp.text)
+	return querylist
 	
 	
 if __name__ == '__main__':
