@@ -73,7 +73,8 @@ def login():
 		query_json["validity"] = False
 		query_json["username"] = None
 	query_json["status"] = resp.status_code
-	
+	query_json["gottten_email"] = email
+	query_json["gotten_password"] = password
 	resp.connection.close()
 	return json.dumps(query_json)
 
