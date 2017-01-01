@@ -114,7 +114,7 @@ def get_posts():
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
 	querylist = ast.literal_eval(resp.text)
-	return querylist
+	return json.dumps(querylist)
 	
 	
 if __name__ == '__main__':
