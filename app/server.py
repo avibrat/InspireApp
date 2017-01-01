@@ -26,6 +26,30 @@ query_url = data_url + '/v1/query'
 @app.route("/")
 def hello():
 	return "Hello World!"
+	
+@app.route("/login")
+def login():
+	email = request.args.get('email')
+	password = request.args.get('password')
+	
+	url = "https://data.dulcify50.hasura-app.io/v1/query"
+	headers = {'Authorization': 'Bearer q7eixk77cfs2xo529kztvn4onvmx8l2c','Content-Type': 'application/json'}
+	params = {
+		"type":"select",
+		"args":{
+			"table":"user",
+			"columns":["email","pwd"],
+			"where": {"email" : email}
+		}
+	}
+	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
+	resp.status_code
+	print resp.json()
+	
+	
+	
+	
+	
 
 if __name__ == '__main__':
     app.run(debug=True)
