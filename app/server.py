@@ -154,7 +154,8 @@ def make_solution_post():
 			]
 		}
 	}
-	return insert_validate()
+	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
+	return insert_validate(resp.text)
 	
 if __name__ == '__main__':
     app.run(debug=True)
