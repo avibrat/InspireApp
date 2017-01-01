@@ -30,9 +30,9 @@ def hello():
 
 @app.route("/signup",methods=["POST"])
 def signup():
-	email = request.args.get('email')
-	password = request.args.get('password')
-	username = request.args.get('username')
+	email = request.form.get('email')
+	password = request.form.get('password')
+	username = request.form.get('username')
 	url = query_url
 	params = {
 		"type":"insert",
@@ -52,8 +52,8 @@ def signup():
 	
 @app.route("/login",methods=["POST"])
 def login():
-	email = request.form['email']
-	password = request.form['password']
+	email = request.form.get('email')
+	password = request.form.get('password')
 	url = query_url
 	params = {
 		"type":"select",
@@ -76,18 +76,7 @@ def login():
 	query_json["gottten_email"] = email
 	query_json["gotten_password"] = password
 	resp.connection.close()
-	return json.dumps(query_json)
-
-def get_next_id():
-	return "Hello World\n"
-
-@app.route("/makepost")
-def make_post():
-	username = request.args.get('username')
-	post_text = request.args.get('post_text')
-	pid = get_next_id()
-	
-	
+	return json.dumps(query_json)	
 	
 
 if __name__ == '__main__':
