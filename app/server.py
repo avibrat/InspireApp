@@ -26,6 +26,13 @@ query_url = data_url + '/v1/query'
 @app.route("/")
 def hello():
 	return "Hello World!"
+
+@app.route("/signup")
+def signup():
+	email = request.args.get('email')
+	password = request.args.get('password')
+	username = request.args.get('username')
+	url = query_url
 	
 @app.route("/login",methods=["GET","POST"])
 def login():
@@ -45,7 +52,8 @@ def login():
 	query_json = {}
 	query_json["result"] = querylist
 	return json.dumps(query_json)
+
 	
-	
+
 if __name__ == '__main__':
     app.run(debug=True)
