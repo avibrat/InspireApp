@@ -231,7 +231,7 @@ def post_comment():
 def display_comment():
 	pid = call_appropriate_get('pid')
 	comment_result = select_table('comment',{"pid":pid})
-	return comment_result
+	return json.dumps(comment_result)
 	
 
 	
