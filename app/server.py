@@ -64,7 +64,7 @@ def signup():
 	final_result = {}
 	final_result["error"] = None
 
-	if resp_json.has_key("affected_rows"):
+	if "affected_rows" in resp_json:
 		final_result["validity"] = True
 	else:
 		final_result["validity"] = False
