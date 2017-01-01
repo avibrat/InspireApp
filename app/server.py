@@ -26,8 +26,8 @@ query_url = data_url + '/v1/query'
 @app.route("/")
 def hello():
 	return "Hello World!"
-	
-	
+
+
 @app.route("/signup",methods=["POST"])
 def signup():
 	email = request.args.get('email')
