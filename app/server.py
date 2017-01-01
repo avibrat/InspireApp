@@ -23,7 +23,7 @@ else:
 query_url = data_url + '/v1/query'
 
 
-android_test = True
+android_test = False
 
 
 def call_appropriate_get(parameter):
@@ -116,7 +116,9 @@ def get_posts():
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
 	querylist = ast.literal_eval(resp.text)
-	return json.dumps(querylist)
+	query_result = {}
+	post_result["result"] = querylist
+	return json.dumps(post_result)
 
 def get_next_id():
 	url = query_url
