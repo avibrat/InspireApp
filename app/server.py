@@ -24,7 +24,7 @@ else:
 query_url = data_url + '/v1/query'
 
 
-android_test = False
+android_test = True
 
 
 def call_appropriate_get(parameter):
@@ -123,12 +123,12 @@ def select_table(table):
 def get_posts():
 	return json.dumps(select_table("user_posts"))
 
-def get_next_id():
+def get_next_id(table):
 	url = query_url
 	params = {
 		"type":"count",
 		"args":{
-			"table":"user_posts",
+			"table":table,
 			"where" : {}
 		}
 	}
@@ -142,7 +142,7 @@ def make_solution_post():
 	email = call_appropriate_get('email')
 	post_text = call_appropriate_get('post_text')
 	date = call_appropriate_get('date')
-	pid = get_next_id()
+	pid = get_next_id("user_posts")
 	url = query_url
 	params = {
 		"type":"insert",
@@ -167,7 +167,35 @@ def make_solution_post():
 def cheerfeed():
 	return json.dumps(select_table("cheerfeed"))
 
-
+@app.route("/makecheerpost",methods=["POST"]):
+def make_cheer_post():
+	username = call_appropriate_get('username')
+	email = call_appropriate_get('email')
+	post_text = call_appropriate_get('post_text')
+	date = call_appropriate_get('date')
+	type = call_appropriate_get('type')
+	url = call_appropriate_get('image_url')
+	chid = get_next_id("cheerfeed")
+	url = query_url
+	params = {
+		"type":"insert",
+		"args":{
+			"table":"user_posts",
+			"objects":[
+				{
+					"chid":chid,
+					"email":email,
+					"username" : username,
+					"post_text" : post_text,
+					"date" : date,
+					"image_url" : image_url,
+					"type" : type
+				}
+			]
+		}
+	}
+	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
+	return insert_validate(resp.text)
 	
 	
 	
@@ -177,7 +205,7 @@ def cheerfeed():
 	
 	
 	
-	
+##WIT CBT STARTS HERE	
 #have question template as json object?
 issue = {
     'q1': "Why exactly do you feel",
