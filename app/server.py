@@ -174,7 +174,7 @@ def make_cheer_post():
 	post_text = call_appropriate_get('post_text')
 	date = call_appropriate_get('date')
 	type = call_appropriate_get('type')
-	url = call_appropriate_get('image_url')
+	image_url = call_appropriate_get('image_url')
 	chid = get_next_id("cheerfeed")
 	url = query_url
 	params = {
