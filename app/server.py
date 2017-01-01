@@ -230,7 +230,7 @@ def post_comment():
 @app.route('/displaycomment',methods=["POST"])
 def display_comment():
 	pid = call_appropriate_get('pid')
-	return select_table('comment',{"pid":pid})
+	return select_table('comment',{"pid":int(pid)})
 	
 
 	
