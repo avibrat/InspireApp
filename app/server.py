@@ -162,7 +162,7 @@ def make_solution_post():
 	return insert_validate(resp.text)
 
 
-@app.route("/cheerfeed")
+@app.route("/cheerfeed",methods=["POST"])
 def cheerfeed():
 	return json.dumps(select_table("cheerfeed"))
 
