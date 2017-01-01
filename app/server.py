@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 import requests
 import json
 import ast
+from wit import Wit
 import config
 
 app = Flask(__name__)
@@ -167,6 +168,101 @@ def cheerfeed():
 	return json.dumps(select_table("cheerfeed"))
 
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+#have question template as json object?
+issue = {
+    'q1': "Why exactly do you feel",
+    'q2': "In what way is it effecting you?",
+    'q3': "And does you being like this change anything?",
+    'q4': "So what is the worst thing that can happen?",
+    'q5': "How unlikely/likely is it for that to happen?",
+    'q6': "Does that scare you?",
+    'q7': "Think about it from a third person's point of view. What does that look like?"
+}
+incident = {
+    'q1': "You mentioned ",
+    'q2': "How has this incident shaped you?",
+    'q3': "How else could you react to this?"
+}
+
+
+
+
+#get template and personalize it with entity
+def getQuestions(var,template):
+    post = ""
+    if template == incident:
+        post = ". What led to it"
+    template['q1'] = template['q1'] + var + post +"?"
+    return template
+        
+#based on intent pick question template
+def getTemplate(datadict):
+    if datadict['intent'] == 'issue':
+        template = issue
+    else:
+        template = incident
+    var = datadict['entity']
+    return var,template
+
+#get msg from user and pass msg to wit and get intent and entity
+def getFromWit(msg):
+    p = {
+         'v':'20160813',
+         'q': msg
+        }
+    h = {'Authorization':"Bearer NOMO6NVDPVVX3EAX65LZAZ2ROXLVGUVN"}
+    url = 'https://api.wit.ai/message'
+    d = requests.post(url,headers=h,params=p)
+    data = d.json()
+    response = {}
+    try:
+        #if entitiy not present send notEnoughData
+        response['intent'] = data['entities']['intent'][0]['value']
+        if response['intent'] == 'issue':
+            e = 'emotion'
+        else:
+            e = 'event'
+        response['entity'] = data['entities'][e][0]['value']
+        print(response)
+        return response
+    except:
+        return None
+
+@app.route("/cbtsession")
+def cbt_job():
+    msg = call_appropriate_get('msg')
+    r = getFromWit(msg)
+    v,t = getTemplate(r)
+    q = getQuestions(v,t)
+    return (json.dumps(q,sort_keys=True))
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 if __name__ == '__main__':
 	app.run(debug=True)

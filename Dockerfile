@@ -6,7 +6,7 @@ MAINTAINER Team Inspire
 # source code changes
 COPY requirements.txt /flask-app/
 RUN pip3 install -r /flask-app/requirements.txt
-
+RUN pip3 install wit
 # Copy the source
 COPY app /flask-app/app
 WORKDIR /flask-app/app
