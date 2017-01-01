@@ -104,13 +104,14 @@ def login():
 	resp.connection.close()
 	return json.dumps(query_json)	
 
-def select_table(table):
+def select_table(table,where={}):
 	url = query_url
 	params = {
 		"type":"select",
 		"args":{
 			"table":table,
-			"columns":["*"]
+			"columns":["*"],
+			"where":where
 		}
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
@@ -225,6 +226,15 @@ def post_comment():
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
 	return insert_validate(resp.text)
+	
+@app.route('/displaycomment',methods=["POST"])
+def display_comment():
+	pid = call_appropriate_get('pid')
+	comment_result = select_table('comment',{"pid":pid})
+	return comment_result
+	
+
+	
 	
 	
 	
