@@ -50,7 +50,7 @@ def signup():
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
 	return resp.text
 	
-@app.route("/login",methods=["POST"])
+@app.route("/login",methods=["POST","GET"])
 def login():
 	email = request.args.get('email')
 	password = request.args.get('password')
