@@ -43,7 +43,7 @@ def login():
 		}
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
-	return resp.json()	
+	return resp.text
 
 	
 if __name__ == '__main__':
