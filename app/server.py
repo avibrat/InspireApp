@@ -118,11 +118,11 @@ def select_table(table,where={}):
 	querylist = ast.literal_eval(resp.text)
 	post_result = {}
 	post_result["result"] = querylist
-	return post_result
+	return json.dumps(post_result)
 
 @app.route("/solutionfeed",methods=["POST"])
 def get_posts():
-	return json.dumps(select_table("user_posts"))
+	return select_table("user_posts")
 
 def get_next_id(table):
 	url = query_url
@@ -166,7 +166,7 @@ def make_solution_post():
 
 @app.route("/cheerfeed",methods=["POST"])
 def cheerfeed():
-	return json.dumps(select_table("cheerfeed"))
+	return select_table("cheerfeed")
 
 @app.route("/makecheerpost",methods=["POST"])
 def make_cheer_post():
@@ -230,8 +230,7 @@ def post_comment():
 @app.route('/displaycomment',methods=["POST"])
 def display_comment():
 	pid = call_appropriate_get('pid')
-	comment_result = select_table('comment',{"pid":pid})
-	return json.dumps(comment_result)
+	return select_table('comment',{"pid":pid})
 	
 
 	
