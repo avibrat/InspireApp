@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 import requests
 import json
-
+import ast
 import config
 
 app = Flask(__name__)
@@ -43,8 +43,10 @@ def login():
 		}
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
-	finlist = list(resp.text)
-	return finlist
+	finlist = ast.literal_eval(resp.text)
+	finob = {}
+	finob["result"] = finlist
+	return json.dumps(finob)
 	
 if __name__ == '__main__':
     app.run(debug=True)
