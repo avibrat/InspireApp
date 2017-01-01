@@ -59,16 +59,24 @@ def login():
 		"type":"select",
 		"args":{
 			"table":"user",
-			"columns":["email","pwd"],
+			"columns":["*"],
 			"where": {"email" : email}
 		}
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
 	querylist = ast.literal_eval(resp.text)
 	query_json = {}
-	query_json["result"] = querylist
+	if len(querylist) == 1:
+		query_json["validity"] = True
+		query_json["username"] = querylist[0]["username"]
+	else:
+		query_json["validity"] = False
+		query_json["username"] = None
+	query_json["status"] = resp.status_code
+	
 	resp.connection.close()
 	return json.dumps(query_json)
+
 
 	
 
