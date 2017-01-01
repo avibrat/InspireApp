@@ -148,9 +148,8 @@ def make_solution_post():
 					"pid":pid,
 					"email":email,
 					"username" : username,
-					"post_text" : post_text
+					"post_text" : post_text,
 					"date" : date
-					
 				}
 			]
 		}
