@@ -197,6 +197,35 @@ def make_cheer_post():
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
 	return insert_validate(resp.text)
 	
+
+@app.route("/postcomment")
+def post_comment():
+	username = call_appropriate_get('username')
+	email = call_appropriate_get('email')
+	comment_text = call_appropriate_get('comment_text')
+	date = call_appropriate_get('date')
+	pid = call_appropriate_get('pid')
+	cid = get_next_id('comment')
+	url = query_url
+	params = {
+		"type":"insert",
+		"args":{
+			"table":"comment",
+			"objects":[
+				{
+					"cid":cid,
+					"pid":pid,
+					"email":email,
+					"username" : username,
+					"comment_text" : comment_text,
+					"date" : date
+				}
+			]
+		}
+	}
+	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
+	return insert_validate(resp.text)
+	
 	
 	
 	
