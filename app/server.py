@@ -30,7 +30,7 @@ def call_appropriate_get(parameter):
 	if android_test == True:
 		return request.form.get(parameter)
 	else:
-		return request.args.get(parameter)	
+		return request.args.get(parameter)
 
 
 
@@ -59,7 +59,15 @@ def signup():
 		}
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
-	return resp.text
+	resp_json = json.loads(resp.text)
+	final_result = {}
+	final_result["error"] = None
+	if resp_json["affected_rows"] is not None:
+		final_result["validity"] = True
+	else:
+		final_result["validity"] = False
+		final_result["error"] = resp_json["error"]
+	return json.dumps(final_result)
 	
 @app.route("/login",methods=["POST"])
 def login():
@@ -89,5 +97,10 @@ def login():
 	resp.connection.close()
 	return json.dumps(query_json)	
 
+@app.route("/posts",methods=["POST"])
+def get_posts():
+	username = call_appropriate_get('username')
+	
+	
 if __name__ == '__main__':
     app.run(debug=True)
