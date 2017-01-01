@@ -23,6 +23,17 @@ else:
 query_url = data_url + '/v1/query'
 
 
+android_test = False
+
+
+def call_appropriate_get(parameter):
+	if android_test == True:
+		return request.form.get(parameter)
+	else:
+		return request.args.get(parameter)	
+
+
+
 @app.route("/")
 def hello():
 	return "Hello World!"
@@ -30,9 +41,9 @@ def hello():
 
 @app.route("/signup",methods=["POST"])
 def signup():
-	email = request.form.get('email')
-	password = request.form.get('password')
-	username = request.form.get('username')
+		email = call_appropriate_get('email')
+	password = call_appropriate_get('password')
+	username = call_appropriate_get('username')
 	url = query_url
 	params = {
 		"type":"insert",
@@ -52,8 +63,8 @@ def signup():
 	
 @app.route("/login",methods=["POST"])
 def login():
-	email = request.form.get('email')
-	password = request.form.get('password')
+	email = call_appropriate_get('email')
+	password = call_appropriate_get('password')
 	url = query_url
 	params = {
 		"type":"select",
