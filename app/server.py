@@ -180,7 +180,7 @@ def make_cheer_post():
 	params = {
 		"type":"insert",
 		"args":{
-			"table":"user_posts",
+			"table":"cheerfeed",
 			"objects":[
 				{
 					"chid":chid,
@@ -273,22 +273,6 @@ def cbt_job():
     v,t = getTemplate(r)
     q = getQuestions(v,t)
     return (json.dumps(q,sort_keys=True))
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 
