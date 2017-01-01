@@ -41,7 +41,7 @@ def hello():
 
 @app.route("/signup",methods=["POST"])
 def signup():
-		email = call_appropriate_get('email')
+	email = call_appropriate_get('email')
 	password = call_appropriate_get('password')
 	username = call_appropriate_get('username')
 	url = query_url
