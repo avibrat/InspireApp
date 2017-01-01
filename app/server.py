@@ -31,7 +31,8 @@ def hello():
 def login():
 	email = request.args.get('email')
 	password = request.args.get('password')
-	
+	print(email)
+	print(password)
 	url = query_url
 	params = {
 		"type":"select",
