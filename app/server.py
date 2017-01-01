@@ -62,7 +62,7 @@ def signup():
 	resp_json = json.loads(resp.text)
 	final_result = {}
 	final_result["error"] = None
-	if resp_json["affected_rows"] is not None:
+	if resp_json["rows_affected"] is not None:
 		final_result["validity"] = True
 	else:
 		final_result["validity"] = False
