@@ -76,7 +76,7 @@ def login():
 	query_json["gottten_email"] = email
 	query_json["gotten_password"] = password
 	resp.connection.close()
-	return querylist,json.dumps(query_json)	
+	return querylist	
 
 if __name__ == '__main__':
     app.run(debug=True)
