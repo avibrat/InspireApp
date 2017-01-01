@@ -27,7 +27,7 @@ query_url = data_url + '/v1/query'
 def hello():
 	return "Hello World!"
 	
-@app.route("/login")
+@app.route("/login",methods=["GET","POST"])
 def login():
 	email = request.args.get('email')
 	password = request.args.get('password')
