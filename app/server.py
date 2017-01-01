@@ -59,16 +59,16 @@ def signup():
 		}
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
-	return resp.text
-	##resp_json = json.loads(resp.text)
-	##final_result = {}
-	##final_result["error"] = None
-	##if resp_json["rows_affected"] is not None:
-	##	final_result["validity"] = True
-	##else:
-	##	final_result["validity"] = False
-	##	final_result["error"] = resp_json["error"]
-	##return json.dumps(final_result)
+	##return resp.text
+	resp_json = json.loads(resp.text)
+	final_result = {}
+	final_result["error"] = None
+	if resp_json["affected_rows"] == 1:
+		final_result["validity"] = True
+	else:
+		final_result["validity"] = False
+		final_result["error"] = resp_json["error"]
+	return json.dumps(final_result)
 	
 @app.route("/login",methods=["POST"])
 def login():
