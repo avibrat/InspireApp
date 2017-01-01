@@ -31,8 +31,6 @@ def hello():
 def login():
 	email = request.args.get('email')
 	password = request.args.get('password')
-	print(email)
-	print(password)
 	url = query_url
 	params = {
 		"type":"select",
@@ -43,10 +41,11 @@ def login():
 		}
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
-	finlist = ast.literal_eval(resp.text)
-	finob = {}
-	finob["result"] = finlist
-	return json.dumps(finob)
+	querylist = ast.literal_eval(resp.text)
+	query_json = {}
+	query_json["result"] = querylist
+	return json.dumps(query_json)
+	
 	
 if __name__ == '__main__':
     app.run(debug=True)
