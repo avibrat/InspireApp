@@ -165,6 +165,8 @@ def make_solution_post():
 @app.route("/cheerfeed")
 def cheerfeed():
 	return json.dumps(select_table("cheerfeed"))
-	
+
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+	app.run(debug=True)
