@@ -50,10 +50,10 @@ def signup():
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
 	return resp.text
 	
-@app.route("/login",methods=["POST","GET"])
+@app.route("/login",methods=["POST"])
 def login():
-	email = request.args.get('email')
-	password = request.args.get('password')
+	email = request.form['email']
+	password = request.form['password']
 	url = query_url
 	params = {
 		"type":"select",
@@ -78,7 +78,16 @@ def login():
 	resp.connection.close()
 	return json.dumps(query_json)
 
+def get_next_id():
+	return "Hello World\n"
 
+@app.route("/posts/makepost",methods=["GET"]):
+def make_post():
+	username = request.args.get('username')
+	post_text = request.args.get('post_text')
+	pid = get_next_id()
+	
+	
 	
 
 if __name__ == '__main__':
