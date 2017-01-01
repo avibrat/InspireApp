@@ -39,6 +39,19 @@ def hello():
 	return "Hello World!"
 
 
+def insert_validate(text):
+	resp_json = json.loads(text)
+	final_result = {}
+	final_result["error"] = None
+
+	if "affected_rows" in resp_json:
+		final_result["validity"] = True
+	else:
+		final_result["validity"] = False
+		final_result["error"] = resp_json["error"]
+	return json.dumps(final_result)
+	
+
 @app.route("/signup",methods=["POST"])
 def signup():
 	email = call_appropriate_get('email')
@@ -59,18 +72,7 @@ def signup():
 		}
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
-	resp_json = json.loads(resp.text)
-	final_result = {}
-	final_result["error"] = None
-
-	if "affected_rows" in resp_json:
-		final_result["validity"] = True
-		final_result["email"] = email
-		final_result["username"] = username
-	else:
-		final_result["validity"] = False
-		final_result["error"] = resp_json["error"]
-	return json.dumps(final_result)
+	return insert_validate(resp.text)
 	
 @app.route("/login",methods=["POST"])
 def login():
@@ -131,12 +133,29 @@ def get_next_id():
 	
 @app.route("/makesolutionpost",methods=["POST"])
 def make_solution_post():
-	#username = call_appropriate_get('email')
-	#email = call_appropriate_get('username')
-	#post_text = call_appropriate_get('post_text')
-	#date = call_appropriate_get('date')
+	username = call_appropriate_get('email')
+	email = call_appropriate_get('username')
+	post_text = call_appropriate_get('post_text')
+	date = call_appropriate_get('date')
 	pid = get_next_id()
-	return str(pid)
+	url = query_url
+	params = {
+		"type":"insert",
+		"args":{
+			"table":"user_posts",
+			"objects":[
+				{
+					"pid":pid,
+					"email":email,
+					"username" : username,
+					"post_text" : post_text
+					"date" : date
+					
+				}
+			]
+		}
+	}
+	return insert_validate()
 	
 if __name__ == '__main__':
     app.run(debug=True)
