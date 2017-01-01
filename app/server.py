@@ -116,7 +116,7 @@ def get_posts():
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
 	querylist = ast.literal_eval(resp.text)
-	query_result = {}
+	post_result = {}
 	post_result["result"] = querylist
 	return json.dumps(post_result)
 
