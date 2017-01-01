@@ -81,7 +81,7 @@ def login():
 def get_next_id():
 	return "Hello World\n"
 
-@app.route("/makepost"):
+@app.route("/makepost")
 def make_post():
 	username = request.args.get('username')
 	post_text = request.args.get('post_text')
