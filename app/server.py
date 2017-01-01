@@ -167,7 +167,7 @@ def make_solution_post():
 def cheerfeed():
 	return json.dumps(select_table("cheerfeed"))
 
-@app.route("/makecheerpost",methods=["POST"]):
+@app.route("/makecheerpost",methods=["POST"])
 def make_cheer_post():
 	username = call_appropriate_get('username')
 	email = call_appropriate_get('email')
