@@ -215,7 +215,7 @@ def post_comment():
 			"objects":[
 				{
 					"cid":cid,
-					"pid":pid,
+					"pid":int(pid),
 					"email":email,
 					"username" : username,
 					"comment_text" : comment_text,
