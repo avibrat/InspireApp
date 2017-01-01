@@ -198,7 +198,7 @@ def make_cheer_post():
 	return insert_validate(resp.text)
 	
 
-@app.route("/postcomment")
+@app.route("/postcomment",methods=["POST"])
 def post_comment():
 	username = call_appropriate_get('username')
 	email = call_appropriate_get('email')
