@@ -238,7 +238,7 @@ def getFromWit(msg):
     except:
         return None
 
-@app.route("/cbtsession")
+@app.route("/cbtsession",methods=["POST"])
 def cbt_job():
     msg = call_appropriate_get('msg')
     r = getFromWit(msg)
