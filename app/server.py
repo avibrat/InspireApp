@@ -115,7 +115,28 @@ def get_posts():
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
 	querylist = ast.literal_eval(resp.text)
 	return json.dumps(querylist)
+
+def get_next_id():
+	url = query_url
+	params = {
+		"type":"count",
+		"args":{
+			"table":"user_posts",
+			"where" : {}
+		}
+	}
+	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
+	result = json.loads(resp.text)["count"] + 1
+	return result
 	
+@app.route("/makesolutionpost",methods=["POST"])
+def make_solution_post():
+	username = call_appropriate_get('email')
+	email = call_appropriate_get('username')
+	post_text = call_appropriate_get('post_text')
+	date = call_appropriate_get('date')
+	pid = get_next_id()
+	return pid
 	
 if __name__ == '__main__':
     app.run(debug=True)
