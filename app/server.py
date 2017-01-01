@@ -33,7 +33,6 @@ def login():
 	password = request.args.get('password')
 	
 	url = query_url
-	headers = {'Authorization': 'Bearer q7eixk77cfs2xo529kztvn4onvmx8l2c','Content-Type': 'application/json'}
 	params = {
 		"type":"select",
 		"args":{
