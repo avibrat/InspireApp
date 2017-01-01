@@ -103,14 +103,12 @@ def login():
 	resp.connection.close()
 	return json.dumps(query_json)	
 
-
-@app.route("/solutionfeed",methods=["POST"])
-def get_posts():
+def select_table(table):
 	url = query_url
 	params = {
 		"type":"select",
 		"args":{
-			"table":"user_posts",
+			"table":table,
 			"columns":["*"]
 		}
 	}
@@ -118,7 +116,11 @@ def get_posts():
 	querylist = ast.literal_eval(resp.text)
 	post_result = {}
 	post_result["result"] = querylist
-	return json.dumps(post_result)
+	return post_result
+
+@app.route("/solutionfeed",methods=["POST"])
+def get_posts():
+	return json.dumps(select_table("user_posts"))
 
 def get_next_id():
 	url = query_url
@@ -158,6 +160,11 @@ def make_solution_post():
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
 	return insert_validate(resp.text)
+
+
+@app.route("/cheerfeed")
+def cheerfeed():
+	return json.dumps(select_table("cheerfeed"))
 	
 if __name__ == '__main__':
     app.run(debug=True)
