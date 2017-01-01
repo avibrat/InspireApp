@@ -66,7 +66,6 @@ def login():
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
 	querylist = ast.literal_eval(resp.text)
 	query_json = {}
-	print(querylist)
 	if len(querylist) == 1 and querylist[0]["pwd"] == password:
 		query_json["validity"] = True
 		query_json["username"] = querylist[0]["username"]
@@ -77,8 +76,7 @@ def login():
 	query_json["gottten_email"] = email
 	query_json["gotten_password"] = password
 	resp.connection.close()
-	print(json.dumps(query_json))
-	
+	return querylist,json.dumps(query_json)	
 
 if __name__ == '__main__':
     app.run(debug=True)
