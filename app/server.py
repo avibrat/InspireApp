@@ -23,7 +23,7 @@ else:
 query_url = data_url + '/v1/query'
 
 
-android_test = False
+android_test = True
 
 
 def call_appropriate_get(parameter):
@@ -59,7 +59,6 @@ def signup():
 		}
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
-	##return resp.text
 	resp_json = json.loads(resp.text)
 	final_result = {}
 	final_result["error"] = None
