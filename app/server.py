@@ -44,12 +44,7 @@ def login():
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
 	resp.status_code
-	print resp.json()
-	
-	
-	
-	
-	
+	print(resp.json())	
 
 if __name__ == '__main__':
     app.run(debug=True)
