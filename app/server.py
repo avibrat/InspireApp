@@ -29,8 +29,8 @@ def hello():
 	
 @app.route("/login")
 def login():
-	email = request.form['email']
-	password = request.form['password']
+	email = request.args.get('email')
+	password = request.args.get('password')
 	
 	url = "https://data.dulcify50.hasura-app.io/v1/query"
 	headers = {'Authorization': 'Bearer q7eixk77cfs2xo529kztvn4onvmx8l2c','Content-Type': 'application/json'}
