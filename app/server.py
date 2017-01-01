@@ -35,7 +35,7 @@ def call_appropriate_get(parameter):
 
 
 
-@app.route("/")
+@app.route("/",methods=["POST"])
 def hello():
 	return "Hello World!"
 
