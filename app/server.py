@@ -136,7 +136,7 @@ def make_solution_post():
 	#post_text = call_appropriate_get('post_text')
 	#date = call_appropriate_get('date')
 	pid = get_next_id()
-	return pid
+	return str(pid)
 	
 if __name__ == '__main__':
     app.run(debug=True)
