@@ -267,7 +267,8 @@ def post_message():
 @app.route("/profile",methods=["POST"])
 def display_profile():
 	email = call_appropriate_get('email')
-	return email
+	pid=1
+	return select_table('comment',{"pid":int(pid)},"-cid")
 	#return select_table('message',{"to_email" : email},"-mid")
 	
 	
