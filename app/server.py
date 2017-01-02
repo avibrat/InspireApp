@@ -359,9 +359,8 @@ def getFromWit(msg):
                 response['entity'] = None
             else:   
                 response['entity'] = data['entities'][e][0]['value']
-        return response
+        return response.json()
     except:
-        print("error")
         return None
 		
 
