@@ -116,7 +116,7 @@ def select_table(table,where={},order_by=""):
 		}
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
-	return resp
+	return resp.text
 	querylist = ast.literal_eval(resp.text)
 	post_result = {}
 	post_result["result"] = querylist
