@@ -104,14 +104,15 @@ def login():
 	resp.connection.close()
 	return json.dumps(query_json)	
 
-def select_table(table,where={}):
+def select_table(table,where={},order_by=""):
 	url = query_url
 	params = {
 		"type":"select",
 		"args":{
 			"table":table,
 			"columns":["*"],
-			"where":where
+			"where":where,
+			"order-by" : order_by
 		}
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
@@ -122,7 +123,7 @@ def select_table(table,where={}):
 
 @app.route("/solutionfeed",methods=["POST"])
 def get_posts():
-	return select_table("user_posts")
+	return select_table("user_posts",{},"-pid")
 
 def get_next_id(table):
 	url = query_url
@@ -166,7 +167,7 @@ def make_solution_post():
 
 @app.route("/cheerfeed",methods=["POST"])
 def cheerfeed():
-	return select_table("cheerfeed")
+	return select_table("cheerfeed",{},"-chid")
 
 @app.route("/makecheerpost",methods=["POST"])
 def make_cheer_post():
@@ -230,7 +231,7 @@ def post_comment():
 @app.route('/displaycomment',methods=["POST"])
 def display_comment():
 	pid = call_appropriate_get('pid')
-	return select_table('comment',{"pid":int(pid)})
+	return select_table('comment',{"pid":int(pid)},"-cid")
 	
 
 	
