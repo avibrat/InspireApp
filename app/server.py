@@ -167,7 +167,7 @@ def make_solution_post():
 
 @app.route("/cheerfeed",methods=["POST"])
 def cheerfeed():
-	return select_table("cheerfeed",{},"-chid")
+	return select_table("cheerfeed",order_by="-chid")
 
 @app.route("/makecheerpost",methods=["POST"])
 def make_cheer_post():
@@ -234,6 +234,8 @@ def display_comment():
 	return select_table('comment',{"pid":int(pid)},"-cid")
 	
 
+@app.route("/profile",methods=["POST"])
+def message_profile():
 	
 	
 	
