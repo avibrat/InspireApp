@@ -298,39 +298,39 @@ def getQuestions(data_dict):
     
     if data_dict['intent'] == 'issue':
         issue = [
-			"Why exactly do you feel "+var,
+			{"q":"Why exactly do you feel "+var},
 			
-			"In what way is it effecting you?",
-            "And does this feeling '"+var+"' change anything?",
+			{"q":"In what way is it effecting you?"},
+            {"q":"And does this feeling '"+var+"' change anything?"},
 			
-			"So what is the worst thing that can happen?",
-            "How unlikely/likely is it for that to happen?",
-            "Does that scare you?",
+			{"q":"So what is the worst thing that can happen?"},
+            {"q":"How unlikely/likely is it for that to happen?"},
+            {"q":"Does that scare you?"},
 			
-			"Think about it from a third person's point of view. What does that look like?",
-            "Do you agree with that?",
+			{"q":"Think about it from a third person's point of view. What does that look like?"},
+            {"q":"Do you agree with that?"},
 			
-			"Are your judgements based on feeling rather than on facts?",
-            "Might this belief be a habit?",
-            "Do you think you are focussing on irrelevant factors?"
+			{"q":"Are your judgements based on feeling rather than on facts?"},
+            {"q":"Might this belief be a habit?"},
+            {"q":"Do you think you are focussing on irrelevant factors?"}
         ]
         response['que'] = issue
     else:
         incident = [
-				"You mentioned '"+var+"'.What led to it?",
+				{"q":"You mentioned '"+var+"'.What led to it?"},
 				
-				"How has this incident shaped you?",
-                "Are you using phrases that are extreme/exaggerated (like always,never,forever)?",
-                "How else could you react to this?",
+				{"q":"How has this incident shaped you?"},
+                {"q":"Are you using phrases that are extreme/exaggerated (like always,never,forever)?"},
+                {"q":"How else could you react to this?"},
 				
-				"Do you blame yourself for it?",
-                "Does blaming others make you feel better?",
+				{"q":"Do you blame yourself for it?"},
+                {"q":"Does blaming others make you feel better?"},
 				
-				"What do you think about when you remember this incident?",
-                "Is this thought realistic?",
-                "What possible misinterpretations might you be making?",
+				{"q":"What do you think about when you remember this incident?"},
+                {"q":"Is this thought realistic?"},
+                {"q":"What possible misinterpretations might you be making?"},
 				
-				"Is there a part of the picture you are overlooking?"
+				{"q":"Is there a part of the picture you are overlooking?"}
         ]
         response['que'] = incident
     return response
