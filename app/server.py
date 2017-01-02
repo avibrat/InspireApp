@@ -285,41 +285,55 @@ def display_profile():
 	
 ##WIT CBT STARTS HERE	
 #have question template as json object?
-issue = {
-    'q1': "Why exactly do you feel",
-    'q2': "In what way is it effecting you?",
-    'q3': "And does you being like this change anything?",
-    'q4': "So what is the worst thing that can happen?",
-    'q5': "How unlikely/likely is it for that to happen?",
-    'q6': "Does that scare you?",
-    'q7': "Think about it from a third person's point of view. What does that look like?"
-}
-incident = {
-    'q1': "You mentioned ",
-    'q2': "How has this incident shaped you?",
-    'q3': "How else could you react to this?"
-}
-
-
-
-
-#get template and personalize it with entity
-def getQuestions(var,template):
-    post = ""
-    if template == incident:
-        post = ". What led to it"
-    template['q1'] = template['q1'] + var + post +"?"
-    return template
-        
-#based on intent pick question template
-def getTemplate(datadict):
-    if datadict['intent'] == 'issue':
-        template = issue
+#select template bases on intent and personalize with placeholder
+def getQuestions(data_dict):
+    response = {}
+    var = data_dict['entity']
+    if var==None:
+        response['validity']=False
+        return response
     else:
-        template = incident
-    var = datadict['entity']
-    return var,template
-
+        response['validity']=True
+    
+    if data_dict['intent'] == 'issue':
+        issue = [
+			["Why exactly do you feel "+var],
+			
+			["In what way is it effecting you?",
+               "And does this feeling '"+var+"' change anything?"],
+			
+			["So what is the worst thing that can happen?",
+               "How unlikely/likely is it for that to happen?",
+               "Does that scare you?"],
+			
+			["Think about it from a third person's point of view. What does that look like?",
+               "Do you agree with that?"],
+			
+			["Are your judgements based on feeling rather than on facts?",
+               "Might this belief be a habit?",
+               "Do you think you are focussing on irrelevant factors?"]
+        ]
+        response['que'] = issue
+    else:
+        incident = [
+				["You mentioned '"+var+"'.What led to it?"],
+				
+				["How has this incident shaped you?",
+                   "Are you using phrases that are extreme/exaggerated (like always,never,forever)?",
+                   "How else could you react to this?"],
+				
+				["Do you blame yourself for it?",
+                   "Does blaming others make you feel better?"],
+				
+				["What do you think about when you remember this incident?",
+                   "Is this thought realistic?",
+                   "What possible misinterpretations might you be making?"],
+				
+				["Is there a part of the picture you are overlooking?"]
+        ]
+        response['que'] = incident
+    return response
+        
 #get msg from user and pass msg to wit and get intent and entity
 def getFromWit(msg):
     p = {
@@ -333,26 +347,29 @@ def getFromWit(msg):
     response = {}
     try:
         #if entitiy not present send notEnoughData
-        response['intent'] = data['entities']['intent'][0]['value']
-        if response['intent'] == 'issue':
-            e = 'emotion'
+        if not data['entities']:
+            response['entity'] = None
         else:
-            e = 'event'
-        response['entity'] = data['entities'][e][0]['value']
-        print(response)
+            response['intent'] = data['entities']['intent'][0]['value']
+            if response['intent'] == 'issue':
+                e = 'emotion'
+            else:
+                e = 'event'
+            if e not in data['entities']:
+                response['entity'] = None
+            else:   
+                response['entity'] = data['entities'][e][0]['value']
         return response
     except:
+        print("error")
         return None
-
-
 		
 
 @app.route("/cbtsession",methods=["POST"])
 def cbt_job():
     msg = call_appropriate_get('msg')
     r = getFromWit(msg)
-    v,t = getTemplate(r)
-    q = getQuestions(v,t)
+    q = getQuestions(r)
     return (json.dumps(q,sort_keys=True))
 	
 	
