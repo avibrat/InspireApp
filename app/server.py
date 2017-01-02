@@ -268,7 +268,7 @@ def post_message():
 def display_profile():
 	email = call_appropriate_get('email')
 	#return select_table('comment',{"pid":int(pid)},"-cid")
-	return select_table('message',where={'to_email':email},order_by="")
+	return select_table('message',where={'to_email':email},order_by="-mid")
 	
 	
 	
