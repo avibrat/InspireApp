@@ -263,7 +263,11 @@ def post_message():
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
 	return insert_validate(resp.text)
 	
-	
+
+@app.route("/profile",methods=["POST"])	
+def display_profile():
+	to_email = call_appropriate_get('to_email')
+	return select_table('message',{"to_email":email},"-mid")
 	
 	
 	
