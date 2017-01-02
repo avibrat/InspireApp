@@ -24,7 +24,7 @@ else:
 query_url = data_url + '/v1/query'
 
 
-android_test = True
+android_test = False
 
 
 def call_appropriate_get(parameter):
