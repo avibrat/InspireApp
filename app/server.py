@@ -344,7 +344,6 @@ def getFromWit(m):
     url = 'https://api.wit.ai/message'
     d = requests.post(url,headers=h,params=p)
     data = d.json()
-    return data
     response = {}
     try:
         #if entitiy not present send notEnoughData
@@ -369,8 +368,8 @@ def getFromWit(m):
 def cbt_job():
     msg = call_appropriate_get('msg')
     r = getFromWit(msg)
-   # q = getQuestions(r)
-    return (json.dumps(r))
+	q = getQuestions(r)
+    return (json.dumps(q))
 	
 	
 
