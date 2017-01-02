@@ -24,7 +24,7 @@ else:
 query_url = data_url + '/v1/query'
 
 
-android_test = False
+android_test = True
 
 
 def call_appropriate_get(parameter):
@@ -267,7 +267,6 @@ def post_message():
 @app.route("/profile",methods=["POST"])
 def display_profile():
 	email = call_appropriate_get('email')
-	#return select_table('comment',{"pid":int(pid)},"-cid")
 	return select_table('message',where={'to_email':email},order_by="-mid")
 	
 	
