@@ -367,6 +367,7 @@ def getFromWit(msg):
 @app.route("/cbtsession",methods=["POST"])
 def cbt_job():
     msg = call_appropriate_get('msg')
+	return msg
     r = getFromWit(msg)
     q = getQuestions(r)
     return (json.dumps(q,sort_keys=True))
