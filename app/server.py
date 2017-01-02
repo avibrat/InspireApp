@@ -274,7 +274,7 @@ def display_profile():
 	final_result = select_table('message',where={'to_email':email},order_by="-mid")
 	final_result = json.loads(final_result)
 	final_result["influence"] = get_next_id('message',{"to_email":email}) - 1
-	return final_result
+	return json.dumps(final_result)
 	
 
 
