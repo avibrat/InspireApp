@@ -167,7 +167,7 @@ def make_solution_post():
 
 @app.route("/cheerfeed",methods=["POST"])
 def cheerfeed():
-	return select_table("cheerfeed",order_by="-chid")
+	return select_table("cheerfeed",{},"-chid")
 
 @app.route("/makecheerpost",methods=["POST"])
 def make_cheer_post():
