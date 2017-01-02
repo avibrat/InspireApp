@@ -308,7 +308,7 @@ def getQuestions(data_dict):
             {"q":"Do you agree with that?"},
 			{"q":"Are your judgements based on feeling rather than on facts?"},
             {"q":"Might this belief be a habit?"},
-            {"q":"Do you think you are focussing on irrelevant factors?"}
+            {"q":"Do you think you are focussing on irrelevant factors?"},
 			{"q":"What did you infer from this conversation?"}
         ]
         response['que'] = issue
@@ -324,7 +324,7 @@ def getQuestions(data_dict):
                 {"q":"Is this thought realistic?"},
                 {"q":"What possible misinterpretations might you be making?"},
 				{"q":"Is there a part of the picture you are overlooking?"},
-				{"q":"Do you think that it might happen again?"}
+				{"q":"Do you think that it might happen again?"},
 				{"q":"How have you grown since then?"}
         ]
         response['que'] = incident
