@@ -234,8 +234,34 @@ def display_comment():
 	return select_table('comment',{"pid":int(pid)},"-cid")
 	
 
-	
-	
+@app.route("/postmessage",methods=["POST"])	
+def post_message():
+	from_user = call_appropriate_get('from_user')
+	to_user = call_appropriate_get('to_user')
+	from_email = call_appropriate_get('from_email')
+	to_email = call_appropriate_get('to_email')
+	msg_text = call_appropriate_get('msg_text')
+	mid = get_next_id('message')
+	url = query_url
+	params = {
+		"type":"insert",
+		"args":{
+			"table":"message",
+			"objects":[
+				{
+					"mid" : mid,
+					"from_user":from_user,
+					"to_user":to_user,
+					"from_email":from_email,
+					"to_email":to_email,
+					"msg_text" : msg_text
+					#Add cid pid here if varn says ok later on
+				}
+			]
+		}
+	}
+	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
+	return insert_validate(resp.text)
 	
 	
 	
