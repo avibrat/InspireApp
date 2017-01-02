@@ -298,39 +298,34 @@ def getQuestions(data_dict):
     
     if data_dict['intent'] == 'issue':
         issue = [
-			{"q":"Why exactly do you feel "+var},
-			
-			{"q":"In what way is it effecting you?"},
+			{"q":"Why exactly do you feel "+var+"?"},
+			{"q":"In what way is it affecting you?"},
             {"q":"And does this feeling '"+var+"' change anything?"},
-			
 			{"q":"So what is the worst thing that can happen?"},
             {"q":"How unlikely/likely is it for that to happen?"},
             {"q":"Does that scare you?"},
-			
 			{"q":"Think about it from a third person's point of view. What does that look like?"},
             {"q":"Do you agree with that?"},
-			
 			{"q":"Are your judgements based on feeling rather than on facts?"},
             {"q":"Might this belief be a habit?"},
             {"q":"Do you think you are focussing on irrelevant factors?"}
+			{"q":"What did you infer from this conversation?"}
         ]
         response['que'] = issue
     else:
         incident = [
 				{"q":"You mentioned '"+var+"'.What led to it?"},
-				
 				{"q":"How has this incident shaped you?"},
                 {"q":"Are you using phrases that are extreme/exaggerated (like always,never,forever)?"},
                 {"q":"How else could you react to this?"},
-				
 				{"q":"Do you blame yourself for it?"},
                 {"q":"Does blaming others make you feel better?"},
-				
 				{"q":"What do you think about when you remember this incident?"},
                 {"q":"Is this thought realistic?"},
                 {"q":"What possible misinterpretations might you be making?"},
-				
-				{"q":"Is there a part of the picture you are overlooking?"}
+				{"q":"Is there a part of the picture you are overlooking?"},
+				{"q":"Do you think that it might happen again?"}
+				{"q":"How have you grown since then?"}
         ]
         response['que'] = incident
     return response
