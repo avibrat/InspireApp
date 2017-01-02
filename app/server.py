@@ -293,6 +293,7 @@ def getQuestions(data_dict):
         response['validity']=False
         return response
     else:
+	    response['tag'] = var
         response['validity']=True
     
     if data_dict['intent'] == 'issue':
@@ -332,7 +333,6 @@ def getQuestions(data_dict):
 				["Is there a part of the picture you are overlooking?"]
         ]
         response['que'] = incident
-        response['tag'] = var
     return response
         
 #get msg from user and pass msg to wit and get intent and entity
