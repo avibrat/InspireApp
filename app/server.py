@@ -112,7 +112,7 @@ def select_table(table,where={},order_by=""):
 			"table":table,
 			"columns":["*"],
 			"where":where,
-			"order-by" : order_by
+			"order_by" : order_by
 		}
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
