@@ -359,7 +359,7 @@ def getFromWit(m):
                 response['entity'] = None
             else:   
                 response['entity'] = data['entities'][e][0]['value']
-        return response.json()
+        return response
     except:
         return None
 		
