@@ -111,11 +111,12 @@ def select_table(table,where={},order_by=""):
 		"args":{
 			"table":table,
 			"columns":["*"],
-			"where":where,
+			"where": where,
 			"order_by" : order_by
 		}
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
+	return resp
 	querylist = ast.literal_eval(resp.text)
 	post_result = {}
 	post_result["result"] = querylist
