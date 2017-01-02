@@ -24,7 +24,7 @@ else:
 query_url = data_url + '/v1/query'
 
 
-android_test = True
+android_test = False
 
 
 def call_appropriate_get(parameter):
@@ -335,10 +335,10 @@ def getQuestions(data_dict):
     return response
         
 #get msg from user and pass msg to wit and get intent and entity
-def getFromWit(msg):
+def getFromWit(m):
     p = {
          'v':'20160813',
-         'q': msg
+         'q': m
         }
     h = {'Authorization':"Bearer NOMO6NVDPVVX3EAX65LZAZ2ROXLVGUVN"}
     url = 'https://api.wit.ai/message'
