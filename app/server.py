@@ -234,8 +234,6 @@ def display_comment():
 	return select_table('comment',{"pid":int(pid)},"-cid")
 	
 
-@app.route("/profile",methods=["POST"])
-def message_profile():
 	
 	
 	
