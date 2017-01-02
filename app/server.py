@@ -125,13 +125,13 @@ def select_table(table,where={},order_by=""):
 def get_posts():
 	return select_table("user_posts",{},"-pid")
 
-def get_next_id(table):
+def get_next_id(table,where={}):
 	url = query_url
 	params = {
 		"type":"count",
 		"args":{
 			"table":table,
-			"where" : {}
+			"where" : where
 		}
 	}
 	resp = requests.post(url=url, data=json.dumps(params),headers=headers)
@@ -258,8 +258,8 @@ def post_message():
 					"to_email":to_email,
 					"msg_text" : msg_text,
 					#Add cid pid here if varn says ok later on
-					"cid" : cid,
-					"pid" : pid
+					"cid" : int(cid),
+					"pid" : int(pid)
 				}
 			]
 		}
@@ -271,9 +271,13 @@ def post_message():
 @app.route("/profile",methods=["POST"])
 def display_profile():
 	email = call_appropriate_get('email')
-	return select_table('message',where={'to_email':email},order_by="-mid")
+	final_result = select_table('message',where={'to_email':email},order_by="-mid")
+	final_result["influence"] = get_next_id('message',{"to_email":email}) - 1
+	return final_result
 	
-	
+
+
+##--------------------------------------END OF NON-WIT ENDPOINTS----------------------------------------------------	
 	
 	
 	
@@ -338,6 +342,9 @@ def getFromWit(msg):
         return response
     except:
         return None
+
+
+		
 
 @app.route("/cbtsession",methods=["POST"])
 def cbt_job():
