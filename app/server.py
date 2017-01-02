@@ -241,6 +241,8 @@ def post_message():
 	from_email = call_appropriate_get('from_email')
 	to_email = call_appropriate_get('to_email')
 	msg_text = call_appropriate_get('msg_text')
+	pid = call_appropriate_get('pid')
+	cid = call_appropriate_get('cid')
 	mid = get_next_id('message')
 	url = query_url
 	params = {
@@ -254,8 +256,10 @@ def post_message():
 					"to_user":to_user,
 					"from_email":from_email,
 					"to_email":to_email,
-					"msg_text" : msg_text
+					"msg_text" : msg_text,
 					#Add cid pid here if varn says ok later on
+					"cid" : cid,
+					"pid" : pid
 				}
 			]
 		}
