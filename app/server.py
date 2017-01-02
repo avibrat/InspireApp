@@ -264,10 +264,10 @@ def post_message():
 	return insert_validate(resp.text)
 	
 
-@app.route("/profile",methods=["POST"])	
+@app.route("/profile",methods=["POST"])
 def display_profile():
-	to_email = call_appropriate_get('to_email')
-	return select_table('message',{"to_email" : to_email},"-mid")
+	email = call_appropriate_get('email')
+	return select_table('message',{"email" : to_email},"-mid")
 	
 	
 	
