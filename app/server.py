@@ -344,6 +344,7 @@ def getFromWit(msg):
     url = 'https://api.wit.ai/message'
     d = requests.post(url,headers=h,params=p)
     data = d.json()
+	print(data)
     response = {}
     try:
         #if entitiy not present send notEnoughData
