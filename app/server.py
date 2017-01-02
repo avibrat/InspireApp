@@ -369,8 +369,8 @@ def getFromWit(msg):
 def cbt_job():
     msg = call_appropriate_get('msg')
     r = getFromWit(msg)
-    q = getQuestions(r)
-    return (json.dumps(q))
+   # q = getQuestions(r)
+    return (json.dumps(r))
 	
 	
 
